@@ -24,13 +24,6 @@ QVariant ContactModel::data(const QModelIndex &index, int role) const {
             return contact.number;
     }
 
-    if (role == Qt::BackgroundRole) {
-        if (index.row() % 2 == 0)
-            return QBrush(QColor("#f0f0f0"));
-        else
-            return QBrush(QColor("#ffffff"));
-    }
-
     return QVariant();
 }
 
