@@ -32,13 +32,15 @@ void ContactManager::addContact() {
           QMessageBox::warning(this, "Warning", "Please enter a valid number (only digits).");
           return;
       }
-    if (!name.isEmpty() && !number.isEmpty()) {
-        model->addContact(name, number);
-        ui->nameLineEdit->clear();
-        ui->numberLineEdit->clear();
-    } else {
+    if (name.isEmpty() || number.isEmpty()) {
         QMessageBox::warning(this, "Warning", "Please enter both name and number.");
+        return;
     }
+
+    // If we got this far, then everything is good to go
+    model->addContact(name, number);
+    ui->nameLineEdit->clear();
+    ui->numberLineEdit->clear();
 }
 
 void ContactManager::removeContact() {
