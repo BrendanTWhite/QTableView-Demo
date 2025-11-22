@@ -54,7 +54,7 @@ void ContactModel::removeContact(int row) {
 
 bool ContactModel::setData(const QModelIndex &index, const QVariant &value, int role) {
     if (!index.isValid() || role != Qt::EditRole)
-        return 0;
+        return false;
 
     Contact &contact = contacts[index.row()];
 
@@ -65,4 +65,5 @@ bool ContactModel::setData(const QModelIndex &index, const QVariant &value, int 
     }
 
     emit dataChanged(index, index, {role});
+    return true;
 }
