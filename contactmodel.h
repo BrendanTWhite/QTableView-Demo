@@ -7,11 +7,8 @@
 #include <QVariant>
 #include <QBrush>
 
+#include "contactmanager.h"
 
-struct Contact {
-    QString name;
-    QString number;
-};
 
 class ContactModel : public QAbstractTableModel {
     Q_OBJECT
@@ -35,8 +32,6 @@ public:
     void removeContact(int row);
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
-private:
-    QList<Contact> contacts;
 };
 
 #endif // CONTACTMODEL_H

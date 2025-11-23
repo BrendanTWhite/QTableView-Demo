@@ -8,6 +8,9 @@
 // on a field on this glue object on this demo, but
 // might be a QList<Thing> things on another object, in my app.
 
+// To get the parent QObject as a ContactManager, use:
+// static_cast<ContactManager>(asdfasfsadf)
+
 ContactModel::ContactModel(QObject *parent)
     : QAbstractTableModel(parent) {}
 
