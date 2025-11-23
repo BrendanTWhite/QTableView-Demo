@@ -4,6 +4,8 @@
 #include <QMessageBox>
 #include <QInputDialog>
 
+// ContactManager is them main form, with methods for Add, Remove, and Edit
+
 ContactManager::ContactManager(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ContactManager),

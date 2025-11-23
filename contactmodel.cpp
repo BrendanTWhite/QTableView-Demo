@@ -1,5 +1,13 @@
 #include "contactmodel.h"
 
+// This is what Qt calls the "model",
+// but it's not actually a model as I understand them.
+// This is the glue between the model and the UI grid.
+
+// The actual model is the QList<Contact> contacts, which is
+// on a field on this glue object on this demo, but
+// might be a QList<Thing> things on another object, in my app.
+
 ContactModel::ContactModel(QObject *parent)
     : QAbstractTableModel(parent) {}
 
