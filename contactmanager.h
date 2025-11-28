@@ -23,6 +23,9 @@ public:
     explicit ContactManager(QWidget *parent = nullptr);
     ~ContactManager();
 
+    QList<Contact> getContacts() const;
+    void setContacts(const QList<Contact> &newContacts);
+
 private slots:
     void addContact();
     void removeContact();

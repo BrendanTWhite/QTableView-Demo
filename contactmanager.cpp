@@ -77,3 +77,12 @@ void ContactManager::editContact() {
     }
 }
 
+QList<ContactManager::Contact> ContactManager::getContacts() const
+{
+    return contacts;
+}
+
+void ContactManager::setContacts(const QList<Contact> &newContacts)
+{
+    contacts = newContacts;
+}

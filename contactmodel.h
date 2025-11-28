@@ -15,7 +15,7 @@ class ContactModel : public QAbstractTableModel {
 
 public:
 
-    explicit ContactModel(QObject *parent = nullptr);
+    explicit ContactModel(ContactManager *parent = nullptr);
 
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -32,6 +32,10 @@ public:
     void removeContact(int row);
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
+
+private:
+
+    ContactManager* myParentContactManager;
 };
 
 #endif // CONTACTMODEL_H

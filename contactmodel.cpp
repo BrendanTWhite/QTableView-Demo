@@ -11,11 +11,13 @@
 // To get the parent QObject as a ContactManager, use:
 // static_cast<ContactManager>(asdfasfsadf)
 
-ContactModel::ContactModel(QObject *parent)
-    : QAbstractTableModel(parent) {}
+ContactModel::ContactModel(ContactManager *parent)
+    : QAbstractTableModel(parent) {
+    this->myParentContactManager = parent;
+}
 
 int ContactModel::rowCount(const QModelIndex &parent) const {
-    return parent.isValid() ? 0 : contacts.size();
+    return parent.isValid() ? 0 : this->myParentContactManager->getContacts().size();
 }
 
 int ContactModel::columnCount(const QModelIndex &parent) const {
@@ -26,7 +28,7 @@ QVariant ContactModel::data(const QModelIndex &index, int role) const {
     if (!index.isValid())
         return QVariant();
 
-    const Contact &contact = contacts.at(index.row());
+    const ContactManager::Contact &contact = this->myParentContactManager->getContacts().at(index.row());
 
     if (role == Qt::DisplayRole) {
         if (index.column() == 0)
@@ -50,15 +52,15 @@ QVariant ContactModel::headerData(int section, Qt::Orientation orientation, int 
 }
 
 void ContactModel::addContact(const QString &name, const QString &number) {
-    beginInsertRows(QModelIndex(), contacts.size(), contacts.size());
-    contacts.append({name, number});
+    beginInsertRows(QModelIndex(), this->myParentContactManager->getContacts().size(), this->myParentContactManager->getContacts().size());
+    this->myParentContactManager->getContacts().append({name, number});
     endInsertRows();
 }
 
 void ContactModel::removeContact(int row) {
-    if (row >= 0 && row < contacts.size()) {
+    if (row >= 0 && row < this->myParentContactManager->getContacts().size()) {
         beginRemoveRows(QModelIndex(), row, row);
-        contacts.removeAt(row);
+        this->myParentContactManager->getContacts().removeAt(row);
         endRemoveRows();
     }
 }
@@ -67,7 +69,7 @@ bool ContactModel::setData(const QModelIndex &index, const QVariant &value, int 
     if (!index.isValid() || role != Qt::EditRole)
         return false;
 
-    Contact &contact = contacts[index.row()];
+    ContactManager::Contact &contact = this->myParentContactManager->getContacts()[index.row()];
 
     if (index.column() == 0) {
         contact.name = value.toString();
