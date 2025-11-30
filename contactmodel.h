@@ -7,18 +7,15 @@
 #include <QVariant>
 #include <QBrush>
 
+#include "contactmanager.h"
 
-struct Contact {
-    QString name;
-    QString number;
-};
 
 class ContactModel : public QAbstractTableModel {
     Q_OBJECT
 
 public:
 
-    explicit ContactModel(QObject *parent = nullptr);
+    explicit ContactModel(QList<ContactManager::Contact>& contacts,ContactManager *parent = nullptr);
 
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -35,8 +32,10 @@ public:
     void removeContact(int row);
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
+
 private:
-    QList<Contact> contacts;
+
+    QList<ContactManager::Contact>& contacts;
 };
 
 #endif // CONTACTMODEL_H

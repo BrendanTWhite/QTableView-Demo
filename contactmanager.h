@@ -2,6 +2,7 @@
 #define CONTACTMANAGER_H
 
 #include <QMainWindow>
+#include <QList>
 
 class ContactModel;
 
@@ -13,8 +14,17 @@ class ContactManager : public QMainWindow {
     Q_OBJECT
 
 public:
+
+    struct Contact {
+        QString name;
+        QString number;
+    };
+
     explicit ContactManager(QWidget *parent = nullptr);
     ~ContactManager();
+
+    QList<Contact> getContacts() const;
+    void setContacts(const QList<Contact> &newContacts);
 
 private slots:
     void addContact();
@@ -24,6 +34,9 @@ private slots:
 private:
     Ui::ContactManager *ui;
     ContactModel *model;
+
+private:
+    QList<Contact> contacts;
 };
 
 #endif // CONTACTMANAGER_H

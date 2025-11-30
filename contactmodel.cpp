@@ -8,8 +8,12 @@
 // on a field on this glue object on this demo, but
 // might be a QList<Thing> things on another object, in my app.
 
-ContactModel::ContactModel(QObject *parent)
-    : QAbstractTableModel(parent) {}
+// To get the parent QObject as a ContactManager, use:
+// static_cast<ContactManager>(asdfasfsadf)
+
+ContactModel::ContactModel(QList<ContactManager::Contact>& contacts, ContactManager *parent)
+    : QAbstractTableModel(parent), contacts(contacts) {
+}
 
 int ContactModel::rowCount(const QModelIndex &parent) const {
     return parent.isValid() ? 0 : contacts.size();
@@ -23,7 +27,7 @@ QVariant ContactModel::data(const QModelIndex &index, int role) const {
     if (!index.isValid())
         return QVariant();
 
-    const Contact &contact = contacts.at(index.row());
+    const ContactManager::Contact &contact = contacts.at(index.row());
 
     if (role == Qt::DisplayRole) {
         if (index.column() == 0)
@@ -64,7 +68,7 @@ bool ContactModel::setData(const QModelIndex &index, const QVariant &value, int 
     if (!index.isValid() || role != Qt::EditRole)
         return false;
 
-    Contact &contact = contacts[index.row()];
+    ContactManager::Contact &contact = contacts[index.row()];
 
     if (index.column() == 0) {
         contact.name = value.toString();
