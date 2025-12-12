@@ -35,7 +35,7 @@ public:
 
 private:
 
-    QList<ContactManager::Contact>& contacts;
+    QList<ContactManager::Contact>& ref_contacts;
 };
 
 #endif // CONTACTMODEL_H

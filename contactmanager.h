@@ -36,7 +36,7 @@ private:
     ContactModel *model;
 
 private:
-    QList<Contact> contacts;
+    QList<Contact> real_contacts;
 };
 
 #endif // CONTACTMANAGER_H

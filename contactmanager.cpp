@@ -9,7 +9,7 @@
 ContactManager::ContactManager(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ContactManager),
-    model(new ContactModel(this->contacts, this)) {
+    model(new ContactModel(this->real_contacts, this)) {
 
     ui->setupUi(this);
     ui->contactTableView->setModel(model);
@@ -77,12 +77,3 @@ void ContactManager::editContact() {
     }
 }
 
-QList<ContactManager::Contact> ContactManager::getContacts() const
-{
-    return contacts;
-}
-
-void ContactManager::setContacts(const QList<Contact> &newContacts)
-{
-    contacts = newContacts;
-}

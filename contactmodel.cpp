@@ -12,11 +12,11 @@
 // static_cast<ContactManager>(asdfasfsadf)
 
 ContactModel::ContactModel(QList<ContactManager::Contact>& contacts, ContactManager *parent)
-    : QAbstractTableModel(parent), contacts(contacts) {
+    : QAbstractTableModel(parent), ref_contacts(contacts) {
 }
 
 int ContactModel::rowCount(const QModelIndex &parent) const {
-    return parent.isValid() ? 0 : contacts.size();
+    return parent.isValid() ? 0 : ref_contacts.size();
 }
 
 int ContactModel::columnCount(const QModelIndex &parent) const {
@@ -27,7 +27,7 @@ QVariant ContactModel::data(const QModelIndex &index, int role) const {
     if (!index.isValid())
         return QVariant();
 
-    const ContactManager::Contact &contact = contacts.at(index.row());
+    const ContactManager::Contact &contact = ref_contacts.at(index.row());
 
     if (role == Qt::DisplayRole) {
         if (index.column() == 0)
@@ -51,15 +51,15 @@ QVariant ContactModel::headerData(int section, Qt::Orientation orientation, int 
 }
 
 void ContactModel::addContact(const QString &name, const QString &number) {
-    beginInsertRows(QModelIndex(), contacts.size(), contacts.size());
-    contacts.append({name, number});
+    beginInsertRows(QModelIndex(), ref_contacts.size(), ref_contacts.size());
+    ref_contacts.append({name, number});
     endInsertRows();
 }
 
 void ContactModel::removeContact(int row) {
-    if (row >= 0 && row < contacts.size()) {
+    if (row >= 0 && row < ref_contacts.size()) {
         beginRemoveRows(QModelIndex(), row, row);
-        contacts.removeAt(row);
+        ref_contacts.removeAt(row);
         endRemoveRows();
     }
 }
@@ -68,7 +68,7 @@ bool ContactModel::setData(const QModelIndex &index, const QVariant &value, int 
     if (!index.isValid() || role != Qt::EditRole)
         return false;
 
-    ContactManager::Contact &contact = contacts[index.row()];
+    ContactManager::Contact &contact = ref_contacts[index.row()];
 
     if (index.column() == 0) {
         contact.name = value.toString();
