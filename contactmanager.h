@@ -4,27 +4,27 @@
 #include <QMainWindow>
 #include <QList>
 
-class ContactModel;
+class ContactModel; // forward declaration, to allow ptrs & refs
 
 namespace Ui {
-class ContactManager;
+    class ContactManager; // change to window???
 }
 
-class ContactManager : public QMainWindow {
+class ContactWindow : public QMainWindow {
     Q_OBJECT
 
 public:
 
-    struct Contact {
+    struct Contact {  // why here? Not in contactmodel?
         QString name;
         QString number;
     };
 
-    explicit ContactManager(QWidget *parent = nullptr);
-    ~ContactManager();
+    explicit ContactWindow(QWidget *parent = nullptr);
+    ~ContactWindow();
 
-    QList<Contact> getContacts() const;
-    void setContacts(const QList<Contact> &newContacts);
+    QList<Contact> getContacts() const; // not used
+    void setContacts(const QList<Contact> &newContacts); // not used
 
 private slots:
     void addContact();
@@ -32,11 +32,11 @@ private slots:
     void editContact();
 
 private:
-    Ui::ContactManager *ui;
-    ContactModel *model;
+    Ui::ContactManager* ui;
+    ContactModel* ptr_in_window;
 
 private:
-    QList<Contact> real_contacts;
+    QList<Contact> list_in_window;
 };
 
 #endif // CONTACTMANAGER_H
