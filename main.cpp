@@ -1,5 +1,5 @@
 #include <QApplication>
-#include "contactmanager.h"
+#include "contactwindow.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
