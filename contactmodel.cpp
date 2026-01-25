@@ -1,15 +1,8 @@
 #include "contactmodel.h"
 
-// This is what Qt calls the "model",
-// but it's not actually a model as I understand them.
-// This is the glue between the model and the UI grid.
-
-// The actual model is the QList<Contact> contacts, which is
-// on a field on this glue object on this demo, but
-// might be a QList<Thing> things on another object, in my app.
-
-// To get the parent QObject as a ContactWindow, use:
-// static_cast<ContactWindow>(asdfasfsadf)
+// This is what Qt calls the "model", which is
+// the glue between the object (or QList of objects)
+// and the UI grid.
 
 ContactModel::ContactModel(QList<Contact>& contacts, ContactWindow *parent)
     : QAbstractTableModel(parent), list_ref_in_model(contacts) {
@@ -29,10 +22,10 @@ QVariant ContactModel::data(const QModelIndex &index, int role) const {
         return QVariant();
 
     Contact contact = list_ref_in_model.at(index.row());
-        if (index.column() == 0)
-            return contact.name;
-        else if (index.column() == 1)
-            return contact.number;
+    if (index.column() == 0)
+        return contact.name;
+    else if (index.column() == 1)
+        return contact.number;
     else return QVariant();
 
 }
