@@ -1,5 +1,5 @@
-#ifndef CONTACTMANAGER_H
-#define CONTACTMANAGER_H
+#ifndef CONTACTWINDOW_H
+#define CONTACTWINDOW_H
 
 #include <QMainWindow>
 #include <QList>
@@ -40,4 +40,4 @@ private:
     // Window has actual list
 };
 
-#endif // CONTACTMANAGER_H
+#endif // CONTACTWINDOW_H
