@@ -5,6 +5,7 @@
 #include <QList>
 
 class ContactModel; // forward declaration, to allow ptrs & refs
+class Contact; // forward declaration, to allow ptrs & refs
 
 namespace Ui {
     class ContactManager; // change to window???
@@ -14,11 +15,6 @@ class ContactWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-
-    class Contact {  // why here? Not in separte Class file?
-        QString name;
-        QString number;
-    };
 
     explicit ContactWindow(QWidget *parent = nullptr);
     ~ContactWindow();

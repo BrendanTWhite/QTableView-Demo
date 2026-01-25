@@ -11,7 +11,7 @@
 // To get the parent QObject as a ContactWindow, use:
 // static_cast<ContactWindow>(asdfasfsadf)
 
-ContactModel::ContactModel(QList<ContactWindow::Contact>& contacts, ContactWindow *parent)
+ContactModel::ContactModel(QList<Contact>& contacts, ContactWindow *parent)
     : QAbstractTableModel(parent), list_ref_in_model(contacts) {
 }
 
@@ -27,7 +27,7 @@ QVariant ContactModel::data(const QModelIndex &index, int role) const {
     if (!index.isValid())
         return QVariant();
 
-    const ContactWindow::Contact &contact = list_ref_in_model.at(index.row());
+    const Contact &contact = list_ref_in_model.at(index.row());
 
     if (role == Qt::DisplayRole) {
         if (index.column() == 0)
@@ -50,9 +50,9 @@ QVariant ContactModel::headerData(int section, Qt::Orientation orientation, int 
     }
 }
 
-void ContactModel::addContact(const QString &name, const QString &number) {
+void ContactModel::addContact(const QString& name, const QString &number) {
     beginInsertRows(QModelIndex(), list_ref_in_model.size(), list_ref_in_model.size());
-    list_ref_in_model.append({name, number});
+    list_ref_in_model.append(Contact{name, number});
     endInsertRows();
 }
 
@@ -68,7 +68,7 @@ bool ContactModel::setData(const QModelIndex &index, const QVariant &value, int 
     if (!index.isValid() || role != Qt::EditRole)
         return false;
 
-    ContactWindow::Contact &contact = list_ref_in_model[index.row()];
+    Contact &contact = list_ref_in_model[index.row()];
 
     if (index.column() == 0) {
         contact.name = value.toString();

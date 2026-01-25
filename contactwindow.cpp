@@ -1,6 +1,7 @@
 #include "contactwindow.h"
 #include "ui_contactwindow.h"
 #include "contactmodel.h"
+#include "contact.h"
 
 #include <QMessageBox>
 #include <QInputDialog>

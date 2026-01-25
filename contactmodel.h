@@ -8,6 +8,7 @@
 #include <QBrush>
 
 #include "contactwindow.h"
+#include "contact.h"
 
 
 class ContactModel : public QAbstractTableModel {
@@ -16,7 +17,7 @@ class ContactModel : public QAbstractTableModel {
 public:
 
     explicit ContactModel(
-        QList<ContactWindow::Contact>& list_ref_in_model_constructor,
+        QList<Contact>& list_ref_in_model_constructor,
         ContactWindow *parent = nullptr
     );
 
@@ -42,7 +43,7 @@ public:
 
 private:
 
-    QList<ContactWindow::Contact>& list_ref_in_model;
+    QList<Contact>& list_ref_in_model;
     // model has a REFERENCE to the QList
 };
 
