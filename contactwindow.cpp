@@ -1,5 +1,5 @@
-#include "contactmanager.h"
-#include "ui_contactmanager.h"
+#include "contactwindow.h"
+#include "ui_contactwindow.h"
 #include "contactmodel.h"
 
 #include <QMessageBox>

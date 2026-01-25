@@ -25,16 +25,16 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs depr
 CONFIG += c++11
 
 SOURCES += \
-        contactmanager.cpp \
         contactmodel.cpp \
+        contactwindow.cpp \
         main.cpp
 
 HEADERS += \
-        contactmanager.h \
-        contactmodel.h
+        contactmodel.h \
+        contactwindow.h
 
 FORMS += \
-    contactmanager.ui
+    contactwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

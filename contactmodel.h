@@ -7,7 +7,7 @@
 #include <QVariant>
 #include <QBrush>
 
-#include "contactmanager.h"
+#include "contactwindow.h"
 
 
 class ContactModel : public QAbstractTableModel {
