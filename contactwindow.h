@@ -15,7 +15,7 @@ class ContactWindow : public QMainWindow {
 
 public:
 
-    struct Contact {  // why here? Not in contactmodel?
+    class Contact {  // why here? Not in separte Class file?
         QString name;
         QString number;
     };
