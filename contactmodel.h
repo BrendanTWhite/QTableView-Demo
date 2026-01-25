@@ -18,7 +18,7 @@ public:
 
     explicit ContactModel(
         QList<Contact>& list_ref_in_model_constructor,
-        ContactWindow *parent = nullptr
+        ContactWindow *parent
     );
 
 
