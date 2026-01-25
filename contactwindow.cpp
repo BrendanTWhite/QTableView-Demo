@@ -33,14 +33,15 @@ ContactWindow::~ContactWindow() {
 void ContactWindow::addContact() {
     QString name = ui_ptr->nameLineEdit->text();
     QString number = ui_ptr->numberLineEdit->text();
-    if (!number.isEmpty() && !number.toStdString().empty() && !number.toLongLong()) {
-          QMessageBox::warning(this, "Warning", "Please enter a valid number (only digits).");
-          return;
-      }
+
     if (name.isEmpty() || number.isEmpty()) {
         QMessageBox::warning(this, "Warning", "Please enter both name and number.");
         return;
     }
+    if (!number.toLongLong()) {
+          QMessageBox::warning(this, "Warning", "Please enter a valid number (only digits).");
+          return;
+      }
 
     // If we got this far, then everything is good to go
     model_ptr_in_window->addContact(name, number);
