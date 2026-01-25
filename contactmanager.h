@@ -32,11 +32,12 @@ private slots:
     void editContact();
 
 private:
-    Ui::ContactManager* ui;
-    ContactModel* ptr_in_window;
+    Ui::ContactManager* ui_ptr;
+    ContactModel* model_ptr_in_window;
 
 private:
     QList<Contact> list_in_window;
+    // Window has actual list
 };
 
 #endif // CONTACTMANAGER_H

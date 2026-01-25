@@ -9,28 +9,29 @@
 
 ContactWindow::ContactWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::ContactManager),
-    ptr_in_window(new ContactModel(this->list_in_window, this)) {
+    ui_ptr(new Ui::ContactManager),
+    model_ptr_in_window(new ContactModel(this->list_in_window, this))
+{
 
-    ui->setupUi(this);
-    ui->contactTableView->setModel(ptr_in_window);
-    ui->contactTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->contactTableView->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui_ptr->setupUi(this);
+    ui_ptr->contactTableView->setModel(model_ptr_in_window);
+    ui_ptr->contactTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui_ptr->contactTableView->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
 
     // Connect signals for buttons
-    connect(ui->addButton, &QPushButton::clicked, this, &ContactWindow::addContact);
-    connect(ui->removeButton, &QPushButton::clicked, this, &ContactWindow::removeContact);
-    connect(ui->editButton, &QPushButton::clicked, this, &ContactWindow::editContact);
+    connect(ui_ptr->addButton, &QPushButton::clicked, this, &ContactWindow::addContact);
+    connect(ui_ptr->removeButton, &QPushButton::clicked, this, &ContactWindow::removeContact);
+    connect(ui_ptr->editButton, &QPushButton::clicked, this, &ContactWindow::editContact);
 }
 
 ContactWindow::~ContactWindow() {
-    delete ui;
+    delete ui_ptr;
 }
 
 void ContactWindow::addContact() {
-    QString name = ui->nameLineEdit->text();
-    QString number = ui->numberLineEdit->text();
+    QString name = ui_ptr->nameLineEdit->text();
+    QString number = ui_ptr->numberLineEdit->text();
     if (!number.isEmpty() && !number.toStdString().empty() && !number.toLongLong()) {
           QMessageBox::warning(this, "Warning", "Please enter a valid number (only digits).");
           return;
@@ -41,15 +42,15 @@ void ContactWindow::addContact() {
     }
 
     // If we got this far, then everything is good to go
-    ptr_in_window->addContact(name, number);
-    ui->nameLineEdit->clear();
-    ui->numberLineEdit->clear();
+    model_ptr_in_window->addContact(name, number);
+    ui_ptr->nameLineEdit->clear();
+    ui_ptr->numberLineEdit->clear();
 }
 
 void ContactWindow::removeContact() {
-    QModelIndex index = ui->contactTableView->currentIndex();
+    QModelIndex index = ui_ptr->contactTableView->currentIndex();
     if (index.isValid()) {
-        ptr_in_window->removeContact(index.row());
+        model_ptr_in_window->removeContact(index.row());
     } else {
         QMessageBox::warning(this, "Warning", "Please select a contact to remove.");
     }
@@ -57,11 +58,11 @@ void ContactWindow::removeContact() {
 
 
 void ContactWindow::editContact() {
-    QModelIndex index = ui->contactTableView->currentIndex();
+    QModelIndex index = ui_ptr->contactTableView->currentIndex();
     if (index.isValid()) {
 
-        QString currentName = ptr_in_window->data(ptr_in_window->index(index.row(), 0)).toString();
-        QString currentNumber = ptr_in_window->data(ptr_in_window->index(index.row(), 1)).toString();
+        QString currentName = model_ptr_in_window->data(model_ptr_in_window->index(index.row(), 0)).toString();
+        QString currentNumber = model_ptr_in_window->data(model_ptr_in_window->index(index.row(), 1)).toString();
 
 
         QString name = QInputDialog::getText(this, "Edit Contact", "Enter new contact name:", QLineEdit::Normal, currentName);
@@ -69,8 +70,8 @@ void ContactWindow::editContact() {
             QString number = QInputDialog::getText(this, "Edit Contact", "Enter new contact number:", QLineEdit::Normal, currentNumber);
             if (!number.isEmpty()) {
 
-                ptr_in_window->setData(ptr_in_window->index(index.row(), 0), name);
-                ptr_in_window->setData(ptr_in_window->index(index.row(), 1), number);
+                model_ptr_in_window->setData(model_ptr_in_window->index(index.row(), 0), name);
+                model_ptr_in_window->setData(model_ptr_in_window->index(index.row(), 1), number);
             }
         }
     } else {

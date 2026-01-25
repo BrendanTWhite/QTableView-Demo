@@ -43,6 +43,7 @@ public:
 private:
 
     QList<ContactWindow::Contact>& list_ref_in_model;
+    // model has a REFERENCE to the QList
 };
 
 #endif // CONTACTMODEL_H
