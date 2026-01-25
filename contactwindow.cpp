@@ -12,7 +12,7 @@ ContactWindow::ContactWindow(QWidget *parent) :
     ui_ptr(new Ui::ContactManager),
     model_ptr_in_window(new ContactModel(this->list_in_window, this))
 {
-
+    // Set up UI
     ui_ptr->setupUi(this);
     ui_ptr->contactTableView->setModel(model_ptr_in_window);
     ui_ptr->contactTableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
