@@ -24,19 +24,17 @@ int ContactModel::columnCount(const QModelIndex &parent) const {
 }
 
 QVariant ContactModel::data(const QModelIndex &index, int role) const {
-    if (!index.isValid())
+
+    if (!index.isValid() || role != Qt::DisplayRole)
         return QVariant();
 
-    const Contact &contact = list_ref_in_model.at(index.row());
-
-    if (role == Qt::DisplayRole) {
+    Contact contact = list_ref_in_model.at(index.row());
         if (index.column() == 0)
             return contact.name;
         else if (index.column() == 1)
             return contact.number;
-    }
+    else return QVariant();
 
-    return QVariant();
 }
 
 QVariant ContactModel::headerData(int section, Qt::Orientation orientation, int role) const {
