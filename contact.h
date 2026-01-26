@@ -7,7 +7,8 @@
 class Contact
 {
 public:
-Contact(const QString& name, const QString& number);
+
+    Contact(const QString& name, const QString& number);
 
     QString name;
     QString number;
