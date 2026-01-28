@@ -19,8 +19,8 @@ public:
     explicit ContactWindow(QWidget *parent = nullptr);
     ~ContactWindow();
 
-    QList<Contact> getContacts() const; // not used
-    void setContacts(const QList<Contact> &newContacts); // not used
+    // QList<Contact> getContacts() const; // not used
+    // void setContacts(const QList<Contact> &newContacts); // not used
 
 private slots:
     void addContact();
@@ -29,11 +29,10 @@ private slots:
 
 private:
     Ui::ContactManager* ui_ptr;
-    ContactModel* model_ptr_in_window;
 
-private:
-    QList<Contact> list_in_window;
-    // Window has actual list
+    ContactModel* model_ptr_in_window; // why both
+    QList<Contact> list_in_window;     // of these?
+
 };
 
 #endif // CONTACTWINDOW_H
